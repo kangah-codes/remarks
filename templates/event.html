@@ -1,0 +1,161 @@
+<html>
+    <head>
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lora:700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:600,800&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    </head>
+    <body>
+        <script>
+            const ratings = {};
+        </script>
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+        <div class="container" style="display: block">
+            <div class="topnav">
+                <a href="/" style="font-size:25px;"><img src="{{ url_for('static', filename='img/logo_alone.png') }}" class="img_home"></a>
+                <a href="/upload" style="font-size:25px;">Upload an event</a>
+                <a href="/about" style="font-size:25px;">About</a>
+                <a href="/contact" style="font-size:25px;">Contact</a>
+                <div class="search-container">
+                    <form action='/search' method="post">
+                        <input type="text" placeholder="Search for an event" name="search">
+                        <button type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>   
+            </div>
+            <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+                    <div class="well event shadow lol" style="float: left;width:40%;height: 80%;position: fixed;">
+                        <div class="media event_logo">
+                            <a class="pull-left" href="#">
+                                <img class="media-object avatar custom-media" src='../static/img/{{ event[1][0]|lower }}.png' style="width: 150px; height: 150px">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading event_name" style="margin-top: 10px;">{{ event[1] }}</h4>
+                            <p class="event_owner_page">{{ event[0] }}</p><br>
+                            <p class="event_description" style="margin-top: 0px; padding: 30px;">
+                                {{ event[3] }}
+                            </p>
+                            <!-- <button class="open-button" onclick="openForm()">Open Form</button>
+                            <p style="position: absolute;bottom: 30">Add post</p><br> -->
+                            <ul class="list-inline list-unstyled" style=" position: absolute;bottom: 0;">
+                                <li class="bottom_text"><span><i class="glyphicon glyphicon-calendar post_num"></i>{{ event[2][0:10] }}</span></li>
+                                <li>|</li>
+                                <span class="bottom_text"><i class="glyphicon glyphicon-comment post_num"></i><a href="#post">{{ len(event[4].split('/'))-1 }} Remarks</a></span>
+                                <li>|</li>
+                                <span class="bottom_text"><i class="glyphicon glyphicon-map-marker post_num"></i>{{ event[5] }}</span>
+                                <li>|</li>
+                                {% if event[6] == 0 %}
+                                    <span class="bottom_text"><i class="glyphicon glyphicon-usd post_num"></i>Free</span>
+                                {% else %}
+                                    <span class="bottom_text"><i class="glyphicon glyphicon-usd post_num"></i>{{ event[6] }}</span>
+                                {% endif %}
+                                <li>|</li>
+                                <div class="stars-outer">
+                                    <div class="stars-inner">
+                                        
+                                    </div>
+                                </div>
+                                        <script>
+                                            let rating = {{ event[7] }}
+                                            let starTotal = 5;
+                                            let starPercentage = (rating / starTotal) * 100;
+                                            let starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
+                                            document.querySelector(`.lol .stars-inner`).style.width = starPercentageRounded; 
+                                        </script>
+                                    </ul>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="well event shadow lol" style="float: right; width: 52%">
+                        <center>
+                            <button class="btn" onclick="openForm()">Add a ReMark</button>
+                            <div class="form-popup" id="myForm">
+                                <form method="post" class="form-container">
+                                    <h1 style="font-family: 'Montserrat', serif;font-weight: 500;">Add a ReMark</h1>
+                                    <input type="text" placeholder="Enter Remark" name="name" required><br>
+                                    <textarea rows="4" cols="50" name="body" placeholder="Remark" style="margin-bottom: 10px;width: 100%" required></textarea><br>
+                                    <!-- <input type="text" name="event" placeholder="Event ID" required><br> -->
+                                    <input type="number" name="rating" placeholder="Rating" value="Rating" min="0" max="5.0" step="0.25" required style="margin-bottom: 20px;"><br>
+                                    <button type="submit" class="btn" >Add ReMark</button>
+                                    <button type="button" class="btn cancel" onclick="closeForm()">Close Form</button>
+                                    <p>{{ msg }}</p>
+                                </form>
+                            </div>
+                        </center>
+                    </div>
+                    {% for child in child_posts[0] %}
+
+                    <!-- New one -->
+                    
+                    <script type="text/javascript">
+                        ratings['{{ child[0] }}'] = {{ child[5] }};
+                    </script>
+                    <div class="well post_well event shadow f{{ child[0] }}" style="float: right;width:52%;position: relative;overflow:auto;">
+                        <div class="media event_logo">
+                            <div class="media-body">
+                                <h4 class="media-heading event_name">{{ child[1] }}</h4>
+                            <p class="event_description">{{ child[2] }}</p>
+                            <ul class="list-inline list-unstyled">
+                                <li class="bottom_text"><span><i class="glyphicon glyphicon-calendar post_num"></i>{{ child[3][0:10] }}</span></li>
+                                <li>|</li>
+                                <div class="stars-outer">
+                                    <div class="stars-inner"></div>
+                                </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> 
+                    
+                    
+                    {% endfor %}
+            </div>
+        </div>
+        <script>
+            function openForm() {
+              document.getElementById("myForm").style.display = "block";
+            }
+
+            function closeForm() {
+              document.getElementById("myForm").style.display = "none";
+            }
+
+            closeForm();
+
+            //const starTotal = 5;
+            for(rating in ratings) {
+              const starPercentage = (ratings[rating] / starTotal) * 100;
+              const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
+              document.querySelector(`.f${rating} .stars-inner`).style.width = starPercentageRounded; 
+              console.log(ratings)
+            }
+                //Get the button
+                var mybutton = document.getElementById("myBtn");
+                
+                // When the user scrolls down 20px from the top of the document, show the button
+                window.onscroll = function() {scrollFunction()};
+                
+                function scrollFunction() {
+                  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    mybutton.style.display = "block";
+                  } else {
+                    mybutton.style.display = "none";
+                  }
+                }
+                
+                // When the user clicks on the button, scroll to the top of the document
+                function topFunction() {
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                  
+                }
+        </script>
+    </body>
+</html>

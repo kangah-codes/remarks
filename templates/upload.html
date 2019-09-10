@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lora:700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:600,800&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+        <div class="container">
+            <div class="topnav">
+                <a href="/" style="font-size:25px;"><img src="{{ url_for('static', filename='img/logo_alone.png') }}" class="img_home"></a>
+                <a class="active" href="/upload" style="font-size:25px;">Upload an event</a>
+                <a href="/about" style="font-size:25px;">About</a>
+                <a href="/contact" style="font-size:25px;">Contact</a>
+                <div class="search-container">
+                    <form action='/search' method="post">
+                        <input type="text" placeholder="Search for an event" name="search">
+                        <button type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>   
+            </div>
+            <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+        
+            <center style="font-size: 23px; font-family: 'Montserrat', serif; font-weight:500">
+                    <style>
+                    .strong{
+                        font-weight: 800;
+                    }
+                    </style>
+                    <center>
+                    <form method="POST">
+                        <!-- For for creating event -->
+                        <input type="text" name="event_name" placeholder="Event name" required style="margin-top: 50px;"><br>
+                        <small class="form-text text-muted" style="font-size: 13px;">Event name must not be more than 20 characters</small><br>
+                        <textarea rows="4" cols="50" name="event_desc" placeholder="Event description" class="event_desc_input" required style="margin-bottom: 30px;width: 60%;"></textarea><br>
+                        <input type="date" name="event_date" style="margin-bottom: 30px;" placeholder="Event date" required><br>
+                        <input type="text" name="event_location" style="margin-bottom: 30px;" placeholder="Event location"><br>
+                        <input type="number" name="price" placeholder="Ticket price" min="0"><br>
+                        <small style="font-size: 13px;">If event is free, put price as 0</small><br>
+                        <p style="margin-bottom: 30px"></p>
+                        <input type="submit" class="btn btn-primary" name="create" value="Create event" required><br>
+                    </form>
+                </center>
+                    <h1>{{ msg }}</h1>
+            </center>
+
+
+        </div>
+        <script>
+                //Get the button
+                var mybutton = document.getElementById("myBtn");
+                
+                // When the user scrolls down 20px from the top of the document, show the button
+                window.onscroll = function() {scrollFunction()};
+                
+                function scrollFunction() {
+                  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    mybutton.style.display = "block";
+                  } else {
+                    mybutton.style.display = "none";
+                  }
+                }
+                
+                // When the user clicks on the button, scroll to the top of the document
+                function topFunction() {
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                  
+                }
+        </script>
+    </body>
+</html>

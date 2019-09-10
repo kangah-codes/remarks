@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lora:700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:600,800&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+        <div class="container">
+            <div class="topnav">
+                <a href="/" style="font-size:25px;"><img src="{{ url_for('static', filename='img/logo_alone.png') }}" class="img_home"></a>
+                <a href="/upload" style="font-size:25px;">Upload an event</a>
+                <a href="/about" style="font-size:25px;">About</a>
+                <a href="/contact" style="font-size:25px;">Contact</a>
+                <div class="search-container">
+                    <form>
+                        <input type="text" placeholder="Search for an event" name="search">
+                        <button type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>    
+            </div>
+            <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+        
+            <h1 class="top_msg">Posts</h1>
+                {% for i in range(50) %}
+                <div class="well post_well event shadow {{ id }}" >
+                        <div class="media event_logo">
+                            <div class="media-body">
+                                <h4 class="media-heading event_name">Joshua Akangah</h4>
+                            <p class="event_description">I had a very good time!</p>
+                            <ul class="list-inline list-unstyled">
+                                <li class="bottom_text"><span><i class="glyphicon glyphicon-calendar post_num"></i>2019-09-2</span></li>
+                                <li>|</li>
+                                <div class="stars-outer">
+                                    <div class="stars-inner"></div>
+                                </div>
+                                <script>
+                                    const rating = {{ num }}
+                                    const starTotal = 5;
+                                    const starPercentage = (rating / starTotal) * 100;
+                                    const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
+                                    document.querySelector(`.{{ id }} .stars-inner`).style.width = starPercentageRounded; 
+                                </script>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <script>
+                //Get the button
+                var mybutton = document.getElementById("myBtn");
+                
+                // When the user scrolls down 20px from the top of the document, show the button
+                window.onscroll = function() {scrollFunction()};
+                
+                function scrollFunction() {
+                  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    mybutton.style.display = "block";
+                  } else {
+                    mybutton.style.display = "none";
+                  }
+                }
+                
+                // When the user clicks on the button, scroll to the top of the document
+                function topFunction() {
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                  
+                }
+        </script>
+    </body>
+</html>

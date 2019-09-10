@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lora:700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:600,800&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <script>
+            const ratings = {};
+        </script>
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+        <div class="container">
+            <div class="topnav">
+                <a class="active" href="/" style="font-size:25px;"><img src="{{ url_for('static', filename='img/logo_alone.png') }}" class="img_home"></a>
+                <a href="/upload" style="font-size:25px;">Upload an event</a>
+                <a href="/about" style="font-size:25px;">About</a>
+                <a href="/contact" style="font-size:25px;">Contact</a>
+                <div class="search-container">
+                    <form action='/search' method="post">
+                        <input type="text" placeholder="Search for an event" name="search">
+                        <button type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>    
+            </div>
+            <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+            <!-- <h1 class="top_msg">Events</h1> -->
+                {% if len(all) == 0 %}
+                    <h1 class="top_msg">No events yet...</h1>
+                {% else %}
+                    <h1 class="top_msg">Events</h1>
+                {% for _ in all %}
+                    <script type="text/javascript">
+                        ratings['{{ _[0] }}'] = {{ _[7] }};
+                    </script>
+                    <div class="well event shadow l{{ _[0] }}">
+                        <div class="media event_logo">
+                            <a class="pull-left" href="#">
+                                <img class="media-object avatar custom-media" src="../static/img/{{ _[1][0]|lower }}.png" style="width: 100px;height: 100px;">
+                            </a>
+                            <div class="media-body {{ _[0] }}">
+                                <a href="/event/{{ _[0] }}"><h4 class="media-heading event_name">{{ _[1] }}</h4></a>
+                            <p class="text-right event_owner">{{ _[0] }}</p>
+                            <p class="event_description">{{ _[3] }}
+                            </p>
+                            <ul class="list-inline list-unstyled">
+                                <li class="bottom_text"><span><i class="glyphicon glyphicon-calendar post_num"></i>{{ _[2][0:10] }}</span></li>
+                                <li>|</li>
+                                <span class="bottom_text"><i class="glyphicon glyphicon-comment post_num"></i><a href="#post">
+                                    {{ len(_[4].split('/'))-1 }} Remarks</a></span>
+                                <li>|</li>
+                                <span class="bottom_text"><i class="glyphicon glyphicon-map-marker post_num"></i>{{ _[5] }}</span>
+                                <li>|</li>
+                                {% if _[6] == 0 %}
+                                    <span class="bottom_text"><i class="glyphicon glyphicon-usd post_num"></i>Free</span>
+                                {% else %}
+                                    <span class="bottom_text"><i class="glyphicon glyphicon-usd post_num"></i>{{ _[6] }}</span>
+                                {% endif %}
+                                <li>|</li>
+                                <div class="stars-outer">
+                                    <div class="stars-inner"></div>
+                                </div>
+                                
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            
+                {% endif %}
+            </div>
+        </div>
+        <script>
+            const starTotal = 5;
+            for(rating in ratings) {
+              const starPercentage = (ratings[rating] / starTotal) * 100;
+              const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
+              document.querySelector(`.l${rating} .stars-inner`).style.width = starPercentageRounded; 
+              console.log(ratings)
+            }
+                //Get the button
+                var mybutton = document.getElementById("myBtn");
+                
+                window.onscroll = function() {scrollFunction()};
+                
+                function scrollFunction() {
+                  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    mybutton.style.display = "block";
+                  } else {
+                    mybutton.style.display = "none";
+                  }
+                }
+                
+                function topFunction() {
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                  
+                }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lora:700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:600,800&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+        <div class="container">
+            <div class="topnav">
+                <a href="/home" style="font-size:25px;"><img src="{{ url_for('static', filename='img/logo_alone.png') }}" class="img_home"></a>
+                <a href="/upload" style="font-size:25px;">Upload an event</a>
+                <a class="active" href="/about" style="font-size:25px;">About</a>
+                <a href="/contact" style="font-size:25px;">Contact</a>
+                <div class="search-container">
+                    <form action='/search' method="post">
+                        <input type="text" placeholder="Search for an event" name="search">
+                        <button type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>    
+            </div>
+            <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+        
+            <center style="font-size: 23px; font-family: 'Montserrat', serif; font-weight:500; padding: 20px;">
+                <img src="{{ url_for('static', filename='img/logo.png') }}">
+                    <style>
+                    .strong{
+                        font-weight: 800;
+                    }
+                    </style>
+                    <p style="margin-top: 20px;text-align: justify;text-justify: inter-word;">
+                        When you go for an event or party and have a good experience, it's likely that you won't keep the event a secret.
+                        After all, when people enjoy a great outing, exceptional service or a pleasant atmosphere, they typically make an effort to tell other people about it.
+                        Many of us, particularly city dwellers, are naturally curious about what's new, popular or just plain good around town, and sharing with others is one of the easier and more reliable ways of establishing the best events around.
+                        So how does <strong>ReMark</strong> work? How do members use it, and what benefits does the site offer?<br>
+
+                        <h1 class="strong">How does ReMark work?</h1>
+
+                        Anyone with an Internet connection can browse the ReMark Website. 
+                        It's easy to look through event reviews and ratings and read about other people's experiences. 
+                        When you open up ReMarks's home page, events in the near future are more likely to show
+                        than events which have already happened. <br>
+
+                        <h1 class="strong">The magic behind it all</h1>
+
+                        Each event uploaded to the site is assigned a unique 6-character alphanumeric, which 
+                        acts as the 'Event ID', and can be used to perform searches and post remarks. When a person attends an event,
+                        the Event ID is given by the organizers, which users can 
+                        use to upload their remarks on the event page. Each user post also has a 6-character alphanumeric
+                        code, similar to that of an event which is used to identify it.
+
+                        <h1 class="strong">Outing made efficient</h1>
+
+                        ReMark is especially effective for events which take place on a regular basis,
+                        where organizer can check out reviews and know what to shape about their event.
+                        And for the users, gives a heads up on what to expect.
+
+                        <h1 class="strong">The best thing yet-</h1>
+
+                        Anyone can upload an event! Of course, with a little verification and 
+                        you should be on your way!
+
+                    </p>
+
+
+
+
+            </center>
+
+
+        </div>
+        <script>
+                //Get the button
+                var mybutton = document.getElementById("myBtn");
+                
+                // When the user scrolls down 20px from the top of the document, show the button
+                window.onscroll = function() {scrollFunction()};
+                
+                function scrollFunction() {
+                  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    mybutton.style.display = "block";
+                  } else {
+                    mybutton.style.display = "none";
+                  }
+                }
+                
+                // When the user clicks on the button, scroll to the top of the document
+                function topFunction() {
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                  
+                }
+        </script>
+    </body>
+</html>
