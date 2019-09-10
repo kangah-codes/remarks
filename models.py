@@ -455,7 +455,7 @@ class Database:
 
         finally:
             self.connection.close()
-d = Database()
+#d = Database()
 #print(d.create_table('event', 'post'))
 #print(d.create_event('event', 'MARLEY', datetime.datetime.today(), "HHH IUHU IHushduifhduifhsdiufh sduihfui sdhfiusdhfuis hadiufhasdui gfusdagfu eagdsufewguknsdyugfyuagdshfgdsjfgaewagsgesyu", "Accra", 0, rating=1.4, event_posts=''))
 #print(d.create_post('post', 'Joshua', 'Enjoyed it', 'BWSUVW', datetime.datetime.today(), 'event', 3.6))
